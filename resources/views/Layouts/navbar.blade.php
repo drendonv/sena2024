@@ -37,7 +37,7 @@
   </div>
   <!-- Aquí añadimos los nuevos enlaces -->
   <div class="flex justify-center text-pink-500">
-    <a href="/" class="mx-2">Tienda</a>
+    <a href="/productos" class="mx-2">Tienda</a>
     <a href="/about" class="mx-2">Quiénes Somos</a>
     <a href="/mis-cursos" class="mx-2">Mis cursos</a>
     <a href="/contacto" class="mx-2">Contáctenos</a>

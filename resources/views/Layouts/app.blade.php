@@ -11,7 +11,7 @@
        {{-- Navbar --}}
        @include( 'layouts.navbar' )
        <div class="text-end text-sm text-green-800 mx-4" >
-        Bienvenido {{ $nombre }}
+      
        </div>
     </header>
 
