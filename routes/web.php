@@ -15,7 +15,9 @@ use App\Http\Controllers\ProductoController;
 |
 */
 
-Route::get('/productos',[ProductoController::class,'index'])->name('productos.index');
+//CRUD de productos
+
+Route::resource('productos',ProductoController::class); //crear 7 rutas para el crud
 
 
 Route::get('/about', function () {

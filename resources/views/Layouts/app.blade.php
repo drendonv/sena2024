@@ -16,6 +16,11 @@
     </header>
 
     <main>
+      <div class="bg-green-100 my-4 text-center">
+        <h1 class="text-lg font-semibold m-4 uppercase">
+          @yield('cabecera')
+        </h1>
+      </div>
         @yield('contenido')
 
     </main>
