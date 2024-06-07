@@ -17,7 +17,7 @@
                         {{ $producto->nombre }}
                         <div class="badge badge-secondary">${{ $producto->precio }}</div>
                     </h2>
-                    <p>{{ $producto->descripcion}}</p>
+                    <p>{{Str::limit($producto->descripcion,50)}}</p>
                     <div class="card-actions justify-end">
                         <div class="badge badge-outline">stock:{{ $producto->stock}}</div> 
                         <div class="badge badge-outline">Products</div>

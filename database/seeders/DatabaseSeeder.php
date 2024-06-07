@@ -1,9 +1,9 @@
 <?php
-
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Producto;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,14 +12,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // Eliminar todos los productos existentes
+        Producto::truncate();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        \App\Models\User::factory(5)->create();
-        \App\Models\Producto::factory(8)->create();
+        // Crear 5 usuarios
+        User::factory(5)->create();
+        
+        // Lista de imágenes específicas y nombres de productos
+        $productos = [
+            ['nombre' => 'Producto A', 'imagen' => 'producto1.jpg'],
+            ['nombre' => 'Producto B', 'imagen' => 'producto2.jpg'],
+            ['nombre' => 'Producto C', 'imagen' => 'producto3.jpg'],
+            ['nombre' => 'Producto D', 'imagen' => 'producto4.jpg'],
+            ['nombre' => 'Producto E', 'imagen' => 'producto5.jpg']
+        ];
+        
+        // Crear 5 productos con nombres específicos
+        foreach ($productos as $producto) {
+            Producto::factory()->create([
+                'nombre' => $producto['nombre'],
+                'imagen' => $producto['imagen']
+            ]);
+        }
     }
 }

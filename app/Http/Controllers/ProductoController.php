@@ -12,8 +12,11 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Producto::all();
-        return view('productos.index',compact('productos'));
+         // Obtener todos los productos ordenados por el campo 'nombre' de forma ascendente
+         $productos = Producto::orderBy('nombre', 'asc')->get();
+
+         // Pasar los productos a la vista
+         return view('productos.index', compact('productos'));
     }
 
     /**

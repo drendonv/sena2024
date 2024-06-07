@@ -22,7 +22,7 @@ class ProductoFactory extends Factory
             'descripcion' => fake()->text(),
             'precio' => fake()->numberBetween(100000,500000),
             'stock' => fake()->numberBetween(1,100),
-            'imagen' => fake()->randomElement(['producto1.jpg', 'producto2.jpg', 'producto3.jpg', 'producto4.jpg', 'producto5.jpg']),
+            // 'imagen' se establecerá explícitamente en el seeder
             
         ];
     }
