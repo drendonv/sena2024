@@ -20,7 +20,7 @@
         </div>
         <div class="w-full lg:w-1/2 pl-4">
             <!-- Aquí va tu imagen -->
-            <img src="{{ asset('images/producto5.jpg') }}" class="mx-auto lg:mx-0" width="400px" alt="Accesorios">
+            <img src="{{ asset('storage/images/1717819670.jpeg') }}" class="mx-auto lg:mx-0" width="400px" alt="Accesorios">
             
         </div>
     </div>

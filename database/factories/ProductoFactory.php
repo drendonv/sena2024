@@ -17,13 +17,11 @@ class ProductoFactory extends Factory
     public function definition(): array
     {
         return [
-
-            'nombre' => fake()->word(),
-            'descripcion' => fake()->text(),
-            'precio' => fake()->numberBetween(100000,500000),
-            'stock' => fake()->numberBetween(1,100),
-            // 'imagen' se establecerá explícitamente en el seeder
-            
+            'nombre' => $this->faker->word(),
+            'descripcion' => $this->faker->text(),
+            'precio' => $this->faker->numberBetween(100000, 500000),
+            'stock' => $this->faker->numberBetween(1, 100),
+            'imagen' => 'images/default.jpg', // Se puede ajustar según sea necesario
         ];
     }
 }
