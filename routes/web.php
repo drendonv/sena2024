@@ -20,6 +20,7 @@ use App\Http\Controllers\ProductoController;
 Route::resource('productos',ProductoController::class); //crear 7 rutas para el crud
 
 
+
 Route::get('/about', function () {
     $nombre = "Usuario"; // Cambia "Usuario" por el nombre del usuario real
     return view('about', compact('nombre'));

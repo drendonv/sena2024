@@ -32,6 +32,7 @@
       */
      public function store(Request $request)
      {
+
          $request->validate([
              'nombre' => 'required|string|max:255',
              'descripcion' => 'required|string',
@@ -39,7 +40,8 @@
              'stock' => 'required|integer',
              'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
          ]);
- 
+            
+      
          $data = $request->all();
  
          if ($request->hasFile('imagen')) {
@@ -47,7 +49,8 @@
              $imagePath = $image->store('images', 'public');
              $data['imagen'] = $imagePath;
          }
- 
+         
+        
          Producto::create($data);
  
          return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
