@@ -4,7 +4,7 @@
 
 @section('contenido')
 <div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-4">Contáctenos</h1>
+    <h1 id="contacto" class="text-3xl font-bold mb-4">Contáctenos</h1>
     <p class="mb-4">Estamos aquí para ayudarte. Puedes contactarnos a través de nuestras redes sociales o enviarnos un mensaje directamente a nuestro WhatsApp.</p>
 
     <div class="flex justify-center space-x-4">

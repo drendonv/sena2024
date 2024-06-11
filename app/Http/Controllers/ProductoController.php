@@ -49,7 +49,7 @@
              $imagePath = $image->store('images', 'public');
              $data['imagen'] = $imagePath;
          }
-         
+          
         
          Producto::create($data);
  

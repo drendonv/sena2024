@@ -12,6 +12,7 @@
        @include( 'layouts.navbar' )
        <div class="text-end text-sm text-green-800 mx-4" >
       Bienvenido!
+      
        </div>
     </header>
 
@@ -27,8 +28,8 @@
 
     <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
         <nav class="grid grid-flow-col gap-4">
-          <a class="link link-hover">Acerca de nosotros</a>
-          <a class="link link-hover">Contacto</a>
+          <a class="link link-hover" href="about">Acerca de nosotros</a>
+          <a class="link link-hover" href="contacto">Contacto</a>
           <a class="link link-hover">Jobs</a>
           <a class="link link-hover">Press kit</a>
         </nav> 
