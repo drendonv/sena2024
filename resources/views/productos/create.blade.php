@@ -15,7 +15,7 @@
 
             {{-- descripcion --}}
             <div>
-                <label for="descripcion" class="label">Descripcion</label>       
+                <label for="descripcion" class="label">Descripción</label>       
                 <input type="text" name="descripcion" placeholder="Escriba la descripción" class="input input-bordered" />
             </div>
 
@@ -34,14 +34,29 @@
             {{-- imagen --}}
             <div>
                 <label for="imagen" class="label">Imagen</label>
-                <input type="file" name="imagen" id="imagen" class="input input-bordered" />
+                <input type="file" name="imagen" id="imagen" class="input input-bordered" onchange="previewImage(event)" />
             </div>
 
             <div class="mt-4">
-                {{-- boton de guardar --}}
-                <button type="submit" class="btn btn-primary"> Crear producto</button>
+                <img id="imagePreview" src="" alt="Vista previa de la imagen" style="max-width: 200px; max-height: 200px;" />
+            </div>
+
+            <div class="mt-4">
+                {{-- botón de guardar --}}
+                <button type="submit" class="btn btn-primary">Crear producto</button>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function(){
+        const output = document.getElementById('imagePreview');
+        output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+</script>
 @endsection
