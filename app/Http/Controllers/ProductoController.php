@@ -7,17 +7,31 @@
  
  class ProductoController extends Controller
  {
+     /**
+      * Display a listing of the resource.
+      */
+   
      public function index()
-     {
-         $productos = Producto::orderBy('nombre', 'asc')->get();
-         return view('productos.index', compact('productos'));
-     }
+{
+    // Obtener productos ordenados por el campo 'nombre' de forma ascendente y paginarlos
+    $productos = Producto::orderBy('nombre', 'asc')->paginate(12); // Cambia 12 al número de productos que quieras por página
+
+    // Pasar los productos a la vista
+    return view('productos.index', compact('productos'));
+}
+
  
+     /**
+      * Show the form for creating a new resource.
+      */
      public function create()
      {
          return view('productos.create');
      }
  
+     /**
+      * Store a newly created resource in storage.
+      */
      public function store(Request $request)
      {
          $request->validate([
@@ -41,16 +55,25 @@
          return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
      }
  
+     /**
+      * Display the specified resource.
+      */
      public function show(Producto $producto)
      {
          return view('productos.show', compact('producto'));
      }
  
+     /**
+      * Show the form for editing the specified resource.
+      */
      public function edit(Producto $producto)
      {
          return view('productos.edit', compact('producto'));
      }
  
+     /**
+      * Update the specified resource in storage.
+      */
      public function update(Request $request, Producto $producto)
      {
          $request->validate([
@@ -64,6 +87,7 @@
          $data = $request->all();
  
          if ($request->hasFile('imagen')) {
+             // Eliminar la imagen antigua si existe
              if ($producto->imagen) {
                  Storage::disk('public')->delete($producto->imagen);
              }
@@ -78,8 +102,12 @@
          return redirect()->route('productos.index')->with('success', 'Producto actualizado exitosamente.');
      }
  
+     /**
+      * Remove the specified resource from storage.
+      */
      public function destroy(Producto $producto)
      {
+         // Eliminar la imagen asociada si existe
          if ($producto->imagen) {
              Storage::disk('public')->delete($producto->imagen);
          }

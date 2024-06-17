@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100">
+<div class="navbar fixed bg-base-100">
   <div class="flex-1 text-pink-500" >
     <a href="#" class="btn btn-ghost text-xl">Laly Taller Creativo</a>
     <a href="{{ route('productos.create') }}" class="btn btn-xs btn-secondary">Crear producto</a>
