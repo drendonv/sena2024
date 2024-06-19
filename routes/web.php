@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
-
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,33 +16,21 @@ use App\Http\Controllers\ProductoController;
 |
 */
 
-//CRUD de productos
+Route::view('/','welcome')->name('home');
+Route::view('/','about')->name('about');
+Route::view('/','welcome')->name('home');
+Route::view('/','welcome')->name('home');
 
-Route::resource('productos',ProductoController::class); //crear 7 rutas para el crud
+Route::resource('productos', ProductoController::class) ->Middleware('auth');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-
-Route::get('/about', function () {
-    $nombre = "Usuario"; // Cambia "Usuario" por el nombre del usuario real
-    return view('about', compact('nombre'));
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/mis-cursos', function () {
-    $nombre = 'Diego Rendon'; // Definir la variable aquí
-    return view('mis-cursos', ['nombre' => $nombre]);
-});
-
-Route::get('/contacto', function () {
-    $nombre = 'Diego Rendon';
-    return view('contacto' , ['nombre' => $nombre]);
-});
-Route::view('/' , 'welcome');
-
-
-
-
-
-
-
-//Route::view('/ contacto','contacto');
-    
+require __DIR__.'/auth.php';
