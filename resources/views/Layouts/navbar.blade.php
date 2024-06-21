@@ -15,7 +15,7 @@
         </svg>
       </div>
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52  text-pink-500">
-        <li><a href="{{ url('/') }}">Mi proyecto</a></li>
+        <li><a href="{{ url('/') }}">Laly taller creativo</a></li>
         <li><a href="{{ url('/') }}">Servicios</a></li>
         <li><a href="{{ route('productos.index') }}">Productos</a></li>
         <li><a href="{{ url('/') }}">Acerca de nosotros</a></li>
@@ -25,7 +25,7 @@
   
   {{-- menu desktop --}}
   <div class="flex-1 hidden  text-pink-500 md:flex space-x-4">
-    <a href="{{ url('/') }}" class="btn btn-ghost btn-sm">Mi proyecto</a>
+    <a href="{{ url('/') }}" class="btn btn-ghost btn-sm">Laly taller creativo</a>
     <a href="{{ url('/') }}" class="btn btn-ghost btn-sm">Servicios</a>
     <a href="{{ route('productos.index') }}" class="btn btn-ghost btn-sm">Productos</a>
     <a href="{{ url('/about') }}" class="btn btn-ghost btn-sm">Acerca de nosotros</a>
