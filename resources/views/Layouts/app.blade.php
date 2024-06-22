@@ -9,7 +9,7 @@
 <body>
     <header>
        {{-- Navbar --}}
-       @include( 'layouts.navbar' )
+       @include( 'Layouts.navbar' )
        <div class="text-end text-sm text-green-800 mx-4" >
       Bienvenido!
       
