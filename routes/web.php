@@ -15,22 +15,26 @@ use GuzzleHttp\Middleware;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Ruta principal
+Route::view('/', 'welcome')->name('home');
 
-Route::view('/','welcome')->name('home');
-Route::view('/','about')->name('about');
-Route::view('/','welcome')->name('home');
-Route::view('/','welcome')->name('home');
+// Ruta para "Acerca de nosotros"
+Route::view('/about', 'about')->name('about');
 
-Route::resource('productos', ProductoController::class) ->Middleware('auth');
+// Ruta de recursos para "productos" con middleware de autenticación
+Route::resource('productos', ProductoController::class)->middleware('auth');
 
+// Ruta para el dashboard, con middleware de autenticación y verificación
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Grupo de rutas con middleware de autenticación
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Archivo de autenticación
 require __DIR__.'/auth.php';
