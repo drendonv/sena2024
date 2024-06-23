@@ -1,4 +1,4 @@
-@extends('Layouts.app')
+@extends('layouts.app')
 @section('titulo', 'Editar Perfil')
 @section('contenido')
 
