@@ -1,6 +1,5 @@
 @extends('layouts.app')
-
-@section('titulo', 'Mis Cursos')
+@section('titulo', 'servicios')
 
 @section('contenido')
 <div class="container mx-auto px-4 py-8">
@@ -89,4 +88,5 @@
         <p class="mb-4">Anímate a aprender y emprender en este hermoso mundo</p>
     </div>
 </div>
+
 @endsection
