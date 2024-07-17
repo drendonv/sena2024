@@ -15,7 +15,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
+        'address',
+        'rol'
+    
     ];
 
     protected $hidden = [
@@ -30,11 +32,15 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role === 'admin';
+        return $this->rol === 'admin';
     }
 
     public function cart()
     {
         return $this->hasMany(Cart::class, 'user_id');
+    }
+
+    public function pedidos(){
+        return $this->hasMany(Pedido::class); //Un usuario puede tener varios pedidos
     }
 }

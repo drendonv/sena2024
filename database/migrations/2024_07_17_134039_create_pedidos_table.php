@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('productos', function (Blueprint $table) {
-            //
+        Schema::create('pedidos', function (Blueprint $table) {
+            $table->id();
+            $table->dateTime('fecha');
+            $table->string('estado', 50);
+            $table->foreignId('user_id')->constrained();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('productos', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('pedidos');
     }
 };

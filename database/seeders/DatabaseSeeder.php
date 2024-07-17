@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,14 +12,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory()->create([
-            'name' =>'Administrador',
-            'email' =>'admin@email.co',
+        // Crear un usuario administrador
+        User::factory()->create([
+            'name' => 'Administrador',
+            'email' => 'admin@email.co',
+            'rol' => 'admin', // Proporcionar un valor para rol
+            'address' => 'Dirección del Administrador', // Proporcionar un valor para address
         ]);
 
-        \App\Models\User::factory(10)->create();
-        \App\Models\Producto::factory(50)->create();
+        // Crear 10 usuarios adicionales
+        User::factory(10)->create([
+            'rol' => 'user', // Proporcionar un valor predeterminado para rol
+            'address' => 'Dirección de Usuario', // Proporcionar un valor predeterminado para address
+        ]);
 
+        // Llamar al seeder de categorías
+        $this->call(CategoriaSeeder::class);
 
+        // Llamar al seeder de productos después de que las categorías hayan sido creadas
+        $this->call(ProductoSeeder::class);
     }
 }

@@ -12,7 +12,7 @@ class CartController extends Controller
     public function add(Request $request)
     {
         $productId = $request->input('product_id');
-        $quantity = $request->input('quantity', 1);
+        $quantity = $request->input('quantity', 0);
 
         if (Auth::check()) {
             $user = Auth::user();
@@ -45,7 +45,7 @@ class CartController extends Controller
             $user = Auth::user();
 
             // Elimina el item del carrito del usuario autenticado
-            $user->cart()->where('product_id', $productId)->delete();
+            $user->cart()->where('id', $productId)->delete();
         } else {
             // Elimina el item del carrito del invitado en la sesión
             $cart = session()->get('cart', []);

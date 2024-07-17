@@ -8,10 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Producto extends Model
 {
     use HasFactory;
-    protected $fillable = [ 'nombre','descripcion','precio','stock','imagen'];
+    protected $fillable = [ 'nombre','descripcion','precio','stock','imagen','categoria_id'];
 
     public function cart() {
         return $this->hasMany(Cart::class);
+    }
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class);  // Un producto pertenece a una categoria
+    }
+
+    public function pedidos()
+    {
+        return $this->belongsToMany(Pedido::class)->withPivot('cantidad', 'precio');  // Un producto puede estar en varios pedidos
     }
     
 }

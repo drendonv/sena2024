@@ -2,6 +2,7 @@
  namespace App\Http\Controllers;
 
  use App\Models\Producto;
+ use App\Models\Categoria;  // Asegúrate de importar el modelo Categoria
  use Illuminate\Http\Request;
  use Illuminate\Support\Facades\Storage;
  
@@ -10,23 +11,22 @@
      /**
       * Display a listing of the resource.
       */
-   
      public function index()
-{
-    // Obtener productos ordenados por el campo 'nombre' de forma ascendente y paginarlos
-    $productos = Producto::orderBy('nombre', 'asc')->paginate(12); // Cambia 12 al número de productos que quieras por página
-
-    // Pasar los productos a la vista
-    return view('productos.index', compact('productos'));
-}
-
+     {
+         // Obtener productos ordenados por el campo 'nombre' de forma ascendente y paginarlos
+         $productos = Producto::orderBy('nombre', 'asc')->paginate(12); // Cambia 12 al número de productos que quieras por página
+ 
+         // Pasar los productos a la vista
+         return view('productos.index', compact('productos'));
+     }
  
      /**
       * Show the form for creating a new resource.
       */
      public function create()
      {
-         return view('productos.create');
+         $categorias = Categoria::all();  // Obtener todas las categorías
+         return view('productos.create', compact('categorias'));  // Pasar las categorías a la vista
      }
  
      /**
@@ -40,6 +40,7 @@
              'precio' => 'required|numeric',
              'stock' => 'required|integer',
              'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+             'categoria_id' => 'required|exists:categorias,id',  // Validar que la categoría exista
          ]);
  
          $data = $request->all();
@@ -68,7 +69,8 @@
       */
      public function edit(Producto $producto)
      {
-         return view('productos.edit', compact('producto'));
+         $categorias = Categoria::all();  // Obtener todas las categorías
+         return view('productos.edit', compact('producto', 'categorias'));  // Pasar las categorías y el producto a la vista
      }
  
      /**
@@ -82,6 +84,7 @@
              'precio' => 'required|numeric',
              'stock' => 'required|integer',
              'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+             'categoria_id' => 'required|exists:categorias,id',  // Validar que la categoría exista
          ]);
  
          $data = $request->all();

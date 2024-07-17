@@ -22,7 +22,7 @@
                 <tbody>
                     @foreach($cartItems as $item)
                         <tr>
-                            <td class="border px-4 py-2">{{ $item->product->nombre }}</td>
+                            <td class="border px-4 py-2">{{ $item->producto->nombre }}</td>
                             <td class="border px-4 py-2">
                                 <form action="{{ route('cart.update', $item->id) }}" method="POST" class="inline">
                                     @csrf
@@ -31,8 +31,8 @@
                                     <button type="submit" class="btn btn-xs btn-primary">Actualizar</button>
                                 </form>
                             </td>
-                            <td class="border px-4 py-2">${{ $item->product->precio }}</td>
-                            <td class="border px-4 py-2">${{ $item->product->precio * $item->quantity }}</td>
+                            <td class="border px-4 py-2">${{ $item->producto->precio }}</td>
+                            <td class="border px-4 py-2">${{ $item->producto->precio * $item->quantity }}</td>
                             <td class="border px-4 py-2">
                                 <form action="{{ route('cart.remove', $item->id) }}" method="POST" class="inline">
                                     @csrf
