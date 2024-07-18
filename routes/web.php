@@ -28,19 +28,20 @@ Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.e
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 Route::delete('/profile/destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
-//Rutas para pedidos
+// Rutas para pedidos
 Route::resource('/pedidos', PedidoController::class)->except(['create']);
 Route::get('/pedidos/create/{producto}', [PedidoController::class, 'create'])->name('pedidos.create');
 
-//Ruta de pago de pedido
+// Rutas de pago de pedido
 Route::get('/pedidos/pagar/{pedido}', [PedidoController::class, 'pagar'])->name('pedidos.pagar');
 Route::get('/pagar/tarjeta/{pedido}', [PagoController::class, 'pagarConTarjeta'])->name('pagar.tarjeta');
+Route::post('/pagar/tarjeta/{pedido}', [PagoController::class, 'procesarPagoConTarjeta'])->name('pagos.procesarTarjeta');
 Route::get('/pagar/nequi/{pedido}', [PagoController::class, 'pagarConNequi'])->name('pagar.nequi');
+Route::post('/pagar/nequi/{pedido}', [PagoController::class, 'procesarPagoConNequi'])->name('pagos.procesarNequi');
 Route::get('/pagar/bancolombia/{pedido}', [PagoController::class, 'pagarConBancolombia'])->name('pagar.bancolombia');
+Route::post('/pagar/bancolombia/{pedido}', [PagoController::class, 'procesarPagoConBancolombia'])->name('pagos.procesarBancolombia');
 
-
-
-
+// Ruta de éxito
+Route::get('/pago/exito/{pedido}', [PagoController::class, 'exito'])->name('pagos.exito');
 
 require __DIR__.'/auth.php';
