@@ -72,10 +72,17 @@ class PedidoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+   
+
     public function edit(Pedido $pedido)
-    {
+{
+    // Verifica si el usuario es el dueño del pedido o es administrador
+    if (auth()->user()->id === $pedido->user_id || auth()->user()->rol === 'admin') {
         return view('pedidos.edit', ['pedido' => $pedido]);
     }
+
+    return redirect()->route('pedidos.index')->with('error', 'No tienes permiso para editar este pedido.');
+}
 
     /**
      * Update the specified resource in storage.
@@ -92,10 +99,18 @@ class PedidoController extends Controller
      */
     public function destroy(Pedido $pedido)
     {
-        //Eliminar el pedido de la tabla pivote (pedido_producto)
-        $pedido->productos()->detach();
-        //Eliminar el pedido de la tabla pedidos
-        $pedido->delete();
-        return to_route('pedidos.index')->with('info', 'Pedido eliminado con éxito');
-    }
+        // Verifica si el usuario es el dueño del pedido o es administrador
+        if (auth()->user()->id === $pedido->user_id || auth()->user()->rol === 'admin') {
+            // Eliminar el pedido de la tabla pivote (pedido_producto)
+            $pedido->productos()->detach();
+            // Eliminar el pedido de la tabla pedidos
+            $pedido->delete();
+            return to_route('pedidos.index')->with('info', 'Pedido eliminado con éxito');
+        }
+    
+        return redirect()->route('pedidos.index')->with('error', 'No tienes permiso para eliminar este pedido.');
+
+
+}
+
 }

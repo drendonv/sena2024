@@ -15,13 +15,12 @@
                   <th>Precio Unit.</th>
                   <th>Valor total</th>
                   <th>Estado</th>
+                  <th>Acciones</th>
                   @if(auth()->user()->rol == 'admin')
                     <th>Cliente</th>
                     <th>Direccion</th>
                     <th>Email</th>
-                    <th>Acciones</th>
                  @endif
-
                 </tr>
               </thead>
               <tbody>
@@ -42,15 +41,20 @@
                                 <span class="badge badge-success">{{ $pedido->estado }}</span>
                             @endif
                         </td>
-                        {{-- Si el usuario es administrador, se muestran los datos del cliente --}}
-                        @if(auth()->user()->rol == 'admin')
-                            <td>{{ $pedido->user->name }}</td>
-                            <td>{{ $pedido->user->address }}</td>
-                            <td>{{ $pedido->user->email }}</td>
-                        
-                            {{-- Botones para editar o eliminar pedido para el administrador --}}
+                        @if(auth()->user()->id === $pedido->user_id || auth()->user()->rol == 'admin')
+                            {{-- Si el usuario es administrador, se muestran los datos del cliente --}}
+                            @if(auth()->user()->rol == 'admin')
+                                <td>{{ $pedido->user->name }}</td>
+                                <td>{{ $pedido->user->address }}</td>
+                                <td>{{ $pedido->user->email }}</td>
+                            @endif
+                            {{-- Botones para editar o eliminar pedido --}}
+                            
                             <td class="flex space-x-2">
+                                {{-- Botón "Estado" visible solo para administradores --}}
+                                @if(auth()->user()->rol == 'admin')
                                 <a href="{{ route('pedidos.edit', $pedido->id) }}" class="btn btn-warning btn-xs normal-case">Estado</a>
+                                @endif
                                 <form action="{{ route('pedidos.destroy', $pedido->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -60,7 +64,7 @@
                         @endif
                     </tr>
                 @endforeach
-                </tbody>
+              </tbody>
             </table>
             {{-- Paginacion --}}
             <div class="flex justify-center mt-4">

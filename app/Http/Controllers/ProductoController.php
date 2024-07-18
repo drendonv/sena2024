@@ -32,29 +32,35 @@
      /**
       * Store a newly created resource in storage.
       */
-     public function store(Request $request)
-     {
-         $request->validate([
-             'nombre' => 'required|string|max:255',
-             'descripcion' => 'required|string',
-             'precio' => 'required|numeric',
-             'stock' => 'required|integer',
-             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-             'categoria_id' => 'required|exists:categorias,id',  // Validar que la categoría exista
-         ]);
- 
-         $data = $request->all();
- 
-         if ($request->hasFile('imagen')) {
-             $image = $request->file('imagen');
-             $imagePath = $image->store('images', 'public');
-             $data['imagen'] = $imagePath;
-         }
- 
-         Producto::create($data);
- 
-         return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
-     }
+      public function store(Request $request)
+      {
+          // Validar los datos de entrada
+          $request->validate([
+              'nombre' => 'required|string|max:255',
+              'descripcion' => 'required|string',
+              'precio' => 'required|numeric',
+              'stock' => 'required|integer',
+              'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+              'categoria_id' => 'required|exists:categorias,id',  // Validar que la categoría exista
+          ]);
+      
+          // Obtener todos los datos del request
+          $data = $request->all();
+      
+          // Si hay una imagen, guardarla en la ruta 'public/images' y obtener su ruta
+          if ($request->hasFile('imagen')) {
+              $image = $request->file('imagen');
+              $imagePath = $image->store('images', 'public');
+              $data['imagen'] = $imagePath; // Guardar la ruta en la base de datos
+          }
+      
+          // Crear el producto con los datos proporcionados
+          Producto::create($data);
+      
+          // Redirigir al índice de productos con un mensaje de éxito
+          return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
+      }
+      
  
      /**
       * Display the specified resource.

@@ -17,7 +17,9 @@
                 {{-- No muestra a los clientes productos que tengan stock 0 --}}
                 @if (auth()->check() && (auth()->user()->rol == 'admin' || $producto->stock > 0))
                     <div class="card w-72 bg-base-100 shadow-xl">
-                        <figure><img src="https://loremflickr.com/200/200/store&{{ $producto->nombre }}" alt="{{ $producto->nombre }}" /></figure>
+                        <figure>
+                                <img src="https://loremflickr.com/200/200/store&{{ $producto->nombre }}" alt="{{ $producto->nombre }}" />
+                        </figure>
                         <div class="card-body">
                             <h2 class="card-title">{{ $producto->nombre }}</h2>
                             <div class="badge badge-success badge-outline">Categoría: {{ $producto->categoria->nombre }}</div>

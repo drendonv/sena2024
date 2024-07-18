@@ -35,10 +35,7 @@ class User extends Authenticatable
         return $this->rol === 'admin';
     }
 
-    public function cart()
-    {
-        return $this->hasMany(Cart::class, 'user_id');
-    }
+    
 
     public function pedidos(){
         return $this->hasMany(Pedido::class); //Un usuario puede tener varios pedidos
