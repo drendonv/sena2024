@@ -113,4 +113,11 @@ class PedidoController extends Controller
 
 }
 
+public function pagar(Pedido $pedido)
+{
+    // Puedes pasar el pedido a la vista si necesitas mostrar detalles específicos
+    return view('pedidos.pagar', compact('pedido'));
+}
+
+
 }

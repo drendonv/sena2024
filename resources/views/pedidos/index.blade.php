@@ -51,10 +51,9 @@
                             {{-- Botones para editar o eliminar pedido --}}
                             
                             <td class="flex space-x-2">
-                                {{-- Botón "Estado" visible solo para administradores --}}
-                                @if(auth()->user()->rol == 'admin')
+                               
                                 <a href="{{ route('pedidos.edit', $pedido->id) }}" class="btn btn-warning btn-xs normal-case">Estado</a>
-                                @endif
+                           
                                 <form action="{{ route('pedidos.destroy', $pedido->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -62,6 +61,12 @@
                                 </form>
                             </td>
                         @endif
+                        
+                         {{-- Botón "Pagar" --}}
+                         <td>
+                            <a href="{{ route('pedidos.pagar', $pedido->id) }}" class="btn btn-primary">Pagar</a>
+                        </td>
+                        
                     </tr>
                 @endforeach
               </tbody>

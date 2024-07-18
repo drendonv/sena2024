@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PagoController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
@@ -31,6 +32,14 @@ Route::delete('/profile/destroy', [ProfileController::class, 'destroy'])->name('
 //Rutas para pedidos
 Route::resource('/pedidos', PedidoController::class)->except(['create']);
 Route::get('/pedidos/create/{producto}', [PedidoController::class, 'create'])->name('pedidos.create');
+
+//Ruta de pago de pedido
+Route::get('/pedidos/pagar/{pedido}', [PedidoController::class, 'pagar'])->name('pedidos.pagar');
+Route::get('/pagar/tarjeta/{pedido}', [PagoController::class, 'pagarConTarjeta'])->name('pagar.tarjeta');
+Route::get('/pagar/nequi/{pedido}', [PagoController::class, 'pagarConNequi'])->name('pagar.nequi');
+Route::get('/pagar/bancolombia/{pedido}', [PagoController::class, 'pagarConBancolombia'])->name('pagar.bancolombia');
+
+
 
 
 
