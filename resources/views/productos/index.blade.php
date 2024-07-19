@@ -4,6 +4,14 @@
 @section('cabecera', 'Nuestros Productos')
 
 @section('contenido')
+    <style>
+        .product-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+
     {{-- Si el usuario es admin muestra crear producto --}}
     @if (auth()->check() && auth()->user()->rol == 'admin')
         <div class="flex justify-end m-4">
@@ -18,7 +26,11 @@
                 @if (auth()->check() && (auth()->user()->rol == 'admin' || $producto->stock > 0))
                     <div class="card w-72 bg-base-100 shadow-xl">
                         <figure>
-                                <img src="https://loremflickr.com/200/200/store&{{ $producto->nombre }}" alt="{{ $producto->nombre }}" />
+                            @if ($producto->imagen)
+                                <img src="{{ asset('storage/' . $producto->imagen) }}" alt="{{ $producto->nombre }}" class="product-image" />
+                            @else
+                                <img src="https://loremflickr.com/200/200/store&{{ $producto->nombre }}" alt="{{ $producto->nombre }}" class="product-image" />
+                            @endif
                         </figure>
                         <div class="card-body">
                             <h2 class="card-title">{{ $producto->nombre }}</h2>

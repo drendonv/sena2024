@@ -8,11 +8,13 @@
             <div class="card-body">
                 {{-- Imagen --}}
                 <div>
-                    @if(file_exists('images/productos/producto_' . $producto->id . '.jpg'))
-                        <img src="{{ asset('images/productos/producto_' . $producto->id . '.jpg') }}" alt="{{$producto->nombre}}" class="rounded-t-lg h-40 w-full object-cover">
-                    @else
-                        <img src="{{ asset('images/productos/default.jpg') }}" alt="{{$producto->nombre}}" class="rounded-t-lg">
-                    @endif
+                    <figure>
+                        @if ($producto->imagen)
+                            <img src="{{ asset('storage/' . $producto->imagen) }}" alt="{{ $producto->nombre }}" />
+                        @else
+                            <img src="https://loremflickr.com/200/200/store&{{ $producto->nombre }}" alt="{{ $producto->nombre }}" />
+                        @endif
+                    </figure>
                 </div>
                 <form action="{{route('productos.update', $producto)}}" method="POST" enctype="multipart/form-data">
                     @csrf

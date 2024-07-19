@@ -5,9 +5,10 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome')->name('home');
+Route::get('/', [WelcomeController::class, 'index'])->name('home');
 Route::view('/about', 'about')->name('about');
 Route::view('/servicios', 'servicios')->name('servicios');
 Route::view('/contacto', 'contacto')->name('contacto');
@@ -45,3 +46,4 @@ Route::post('/pagar/bancolombia/{pedido}', [PagoController::class, 'procesarPago
 Route::get('/pago/exito/{pedido}', [PagoController::class, 'exito'])->name('pagos.exito');
 
 require __DIR__.'/auth.php';
+
