@@ -32,6 +32,8 @@ Route::delete('/profile/destroy', [ProfileController::class, 'destroy'])->name('
 // Rutas para pedidos
 Route::resource('/pedidos', PedidoController::class)->except(['create']);
 Route::get('/pedidos/create/{producto}', [PedidoController::class, 'create'])->name('pedidos.create');
+Route::delete('/pedidos/{pedido}', [PedidoController::class, 'destroy'])->name('pedidos.destroy')->middleware('auth');
+
 
 // Rutas de pago de pedido
 Route::get('/pedidos/pagar/{pedido}', [PedidoController::class, 'pagar'])->name('pedidos.pagar');

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('titulo', 'Consultar Productos')
+@section('titulo', 'Lalytallercreativo')
 
 @section('contenido')
 <div class="hero min-h-screen" style="background-image: url(https://images.pexels.com/photos/26953740/pexels-photo-26953740.jpeg);">

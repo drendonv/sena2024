@@ -22,8 +22,8 @@
     <div class="flex justify-center mx-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
             @foreach ($productos as $producto)
-                {{-- No muestra a los clientes productos que tengan stock 0 --}}
-                @if (auth()->check() && (auth()->user()->rol == 'admin' || $producto->stock > 0))
+                {{-- No muestra a los clientes productos que tengan stock 0, pero los muestra a los admins --}}
+                @if ($producto->stock > 0 || (auth()->check() && auth()->user()->rol == 'admin'))
                     <div class="card w-72 bg-base-100 shadow-xl">
                         <figure>
                             @if ($producto->imagen)
@@ -45,7 +45,7 @@
                         
                             <div class="card-actions justify-end mt-5">
                                 {{-- Si el usuario es admin muestra editar o eliminar --}}
-                                @if (auth()->user()->rol == 'admin')
+                                @if (auth()->check() && auth()->user()->rol == 'admin')
                                     {{-- Editar --}}
                                     <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-warning btn-xs">Editar</a>
                                     {{-- Eliminar --}}
@@ -59,7 +59,11 @@
 				                            @endif
                                 @else
                                     {{-- Si el usuario es cliente muestra realizar una orden --}}
-                                    <a href="{{ route('pedidos.create', $producto->id) }}" class="btn btn-primary btn-xs">Ordenar</a>
+                                    @if (auth()->check())
+                                        <a href="{{ route('pedidos.create', $producto->id) }}" class="btn btn-primary btn-xs">Ordenar</a>
+                                    @else
+                                        <a href="{{ route('register') }}" class="btn btn-primary btn-xs">Ordenar</a>
+                                    @endif
                                 @endif
                             </div>
                         </div>
