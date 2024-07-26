@@ -43,15 +43,20 @@
                             </td>
                             {{-- Botones para editar o eliminar pedido --}}
                             <td class="flex space-x-2">
-                                <a href="{{ route('pedidos.edit', $pedido->id) }}" class="btn btn-warning btn-xs normal-case">Estado</a>
-                                @if(auth()->check() && (auth()->user()->id === $pedido->user_id || auth()->user()->rol == 'admin'))
-                                    <form action="{{ route('pedidos.destroy', $pedido->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" onclick="return confirm('¿Desea eliminar el pedido {{ $pedido->id }}?')" class="btn btn-error btn-xs normal-case">Eliminar</button>
-                                    </form>
-                                @endif
-                            </td>
+                                <td class="flex space-x-2">
+                                    @if(auth()->check() && auth()->user()->rol == 'admin')
+                                        <a href="{{ route('pedidos.edit', $pedido->id) }}" class="btn btn-warning btn-xs normal-case">Estado</a>
+                                    @endif
+                                    @if(auth()->check() && (auth()->user()->id === $pedido->user_id || auth()->user()->rol == 'admin'))
+                                        <form action="{{ route('pedidos.destroy', $pedido->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onclick="return confirm('¿Desea eliminar el pedido {{ $pedido->id }}?')" class="btn btn-error btn-xs normal-case">Eliminar</button>
+                                        </form>
+                                    @endif
+                                </td>
+                                
+                            
                             @if(auth()->user()->rol == 'admin')
                                 <td>{{ $pedido->user->name }}</td>
                                 <td>{{ $pedido->user->address }}</td>
