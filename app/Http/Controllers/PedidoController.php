@@ -12,7 +12,7 @@ class PedidoController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('admin')->only(['edit', 'update', 'destroy']);
+        $this->middleware('admin')->only(['edit', 'update']);
     }
     /**
      * Display a listing of the resource.
